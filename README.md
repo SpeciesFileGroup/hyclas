@@ -12,3 +12,11 @@ npm install
 npm start
 http://localhost:8080
 ```
+
+# UI
+
+_existing code is a demo, programs will add their own buttons/event drivers_
+
+* Click a button to set type.
+* Highlight text(s) to assign type
+* Right click to remove highlight
