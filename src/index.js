@@ -9,21 +9,47 @@ const options = {
     {
       type: 'Date',
       color: 'green',
-      predictions: ['21.iii.2020']
+      predictions: [
+        {
+          text: '21.iii.2020',
+          match: {
+            case: true
+          }
+        }
+      ]
     },
     {
       type: 'Collector',
-      color: 'yellow'
+      color: 'yellow',
+      predictions: [
+        {
+          text:'homer',
+          match: {
+            case: true,
+            whitespace: true
+          }
+        }
+      ]
     },
     {
       type: 'Country',
-      color: 'red'
+      color: 'red',
+      predictions: [
+        { 
+          text: 'USA',
+          match: {
+            case: true
+          }
+        }
+      ]
     }
   ]
 }
 
 var lib = new hyclas(element, options)
 var toolBar = new menuSelector(elementToolbar, lib)
+
+document.querySelector('#json').innerHTML = JSON.stringify(lib.toJSON(), null, 2)
 
 element.addEventListener('createTag', () => {
   document.querySelector('#json').innerHTML = JSON.stringify(lib.toJSON(), null, 2)

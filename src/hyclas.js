@@ -8,6 +8,8 @@ class hyclas {
     if(options) {
       this.types = options.types
     }
+
+    this.setPredictions()
     this.handleEvents()
   }
 
@@ -21,32 +23,74 @@ class hyclas {
 
     if (selectionEnd === selectionStart || selectionString.length === 0 || this.tags.find(item => { return item.label === selectionString && item.type === this.typeSelected })) return
 
-    let tag = this.createTagObject(selectionString, selectionStart, selectionEnd)
+    let tag = this.createTagObject(selectionString, this.getTypeSelected())
 
     try {
       selection.surroundContents(this.createElementTag(tag))
       window.getSelection().removeAllRanges()
-      this.tags.push(tag)
+      this.addTag(tag)
     }
     catch (error) {
       console.log(`Wrong selection: ${error}`)
     }
-
-    this.createEvent()
   }
 
-  createElementTag(tag) {
+  setPredictions () {
+    let types = this.types
+    const FLAGS = {
+      case: 'i',
+      whitespace: 's'
+    }
+    
+    types.forEach(type => {
+      type.predictions.forEach(prediction => {
+        let html = this.element.innerHTML
+        let defaultFlags = ['g']
+        let predictionMatch = Object.keys(prediction.match).filter(key => { return prediction.match[key] }).map(match => { return FLAGS[match] }).concat(defaultFlags).join('')
+
+        console.log(predictionMatch)
+        Object.keys(FLAGS).forEach(key => {
+
+        })
+
+        const regex = new RegExp(`\\b${prediction.text}\\b`,predictionMatch)
+        if (html.search(regex) > -1) {
+          let tag = this.createTagObject(prediction.text, type)
+          let element = this.createElementTag(tag)
+          
+          this.element.innerHTML = html.replace(regex, element.outerHTML)
+          this.addTag(tag)
+        }
+      })
+    })
+    this.tags.forEach(tag => {
+      this.attachContextMenu(this.element.querySelector(`[data-tag-id="${tag.id}"]`))
+    })
+  }
+
+  addTag (tag) {
+    this.tags.push(tag)
+    this.createEvent(tag)
+  }
+
+  createElementTag (tag) {
     let element = document.createElement("span")
+
     element.style.backgroundColor = tag.color
     element.setAttribute('data-tag-id', tag.id)
+    element.innerHTML = tag.label
     
+    this.attachContextMenu(element)
+
+    return element
+  }
+
+  attachContextMenu (element) {
     element.addEventListener('contextmenu', (event) => {
       event.preventDefault()
       event.stopPropagation()
       this.removeTag(event)
     })
-
-    return element
   }
 
   removeTag (event) {
@@ -71,15 +115,16 @@ class hyclas {
     this.getSelection()
   }
 
-  createTagObject (text, selectionStart, selectionEnd) {
-    const TYPE = this.types.find(item => { return item.type === this.typeSelected })
+  getTypeSelected () {
+    return this.types.find(item => { return item.type === this.typeSelected })
+  }
+
+  createTagObject (text, type) {
     return {
       id: Math.random().toString(36).slice(2),
       label: text,
-      type: TYPE.type,
-      color: TYPE.color,
-      start: selectionStart,
-      end: selectionEnd
+      type: type.type,
+      color: type.color
     }
   }
 
