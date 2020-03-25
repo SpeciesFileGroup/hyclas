@@ -48,13 +48,12 @@ class hyclas {
         let defaultFlags = ['g']
         let predictionMatch = Object.keys(prediction.match).filter(key => { return prediction.match[key] }).map(match => { return FLAGS[match] }).concat(defaultFlags).join('')
 
-        console.log(predictionMatch)
         Object.keys(FLAGS).forEach(key => {
 
         })
 
         const regex = new RegExp(`\\b${prediction.text}\\b`,predictionMatch)
-        if (html.search(regex) > -1) {
+        if (regex.test(html)) {
           let tag = this.createTagObject(prediction.text, type)
           let element = this.createElementTag(tag)
           
