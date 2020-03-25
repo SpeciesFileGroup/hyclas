@@ -25,8 +25,7 @@ const options = {
         {
           text:'homer',
           match: {
-            case: true,
-            whitespace: true
+            case: true
           }
         }
       ]
