@@ -1,8 +1,10 @@
 {
-  "name": "hyclas",
+  "name": "@sfgrp/hyclas",
   "version": "0.0.1",
   "description": "A highlighting text classifier.",
-  "main": "index.js",
+  "main": "./dist/hyclas.esm.js",
+  "module": "dist/hyclas.esm.js",
+  "private": false,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack --mode development",
@@ -21,7 +23,7 @@
     "tag"
   ],
   "author": "SpeciesFileGroup",
-  "license": "ISC",
+  "license": "NCSA",
   "bugs": {
     "url": "https://github.com/SpeciesFileGroup/hyclas/issues"
   },

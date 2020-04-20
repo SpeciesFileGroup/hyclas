@@ -27,12 +27,13 @@ class hyclas {
 
     try {
       selection.surroundContents(this.createElementTag(tag))
-      window.getSelection().removeAllRanges()
       this.addTag(tag)
+      console.log(this.element.querySelector(`[data-tag-id="${tag.id}"]`).childNodes)
     }
     catch (error) {
       console.log(`Wrong selection: ${error}`)
     }
+    window.getSelection().removeAllRanges()
   }
 
   setPredictions () {
@@ -72,6 +73,8 @@ class hyclas {
     let element = document.createElement("span")
 
     element.style.backgroundColor = tag.color
+    element.style.paddingLeft = '2px'
+    element.style.paddingRight = '2px'
     element.setAttribute('data-tag-id', tag.id)
     element.innerHTML = tag.label
     

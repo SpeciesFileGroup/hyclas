@@ -7,6 +7,7 @@ const config = {
 		{
 			file: pkg.module,
 			format: 'esm',
+			compact: true
 		},
 	],
 	plugins: [babel()],
