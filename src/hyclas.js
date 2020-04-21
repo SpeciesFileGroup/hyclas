@@ -98,7 +98,6 @@ class hyclas {
     const parent = element.parentNode
     const tagIndex = this.tags.findIndex(tag => { return tag.id === tagId })
 
-    this.tags.splice(tagIndex, 1)
     while (element.firstChild) parent.insertBefore(element.firstChild, element);
     try {
       parent.removeChild(element)
@@ -106,6 +105,7 @@ class hyclas {
     catch (error) {}
     
     this.removeEvent(this.tags[tagIndex])
+    this.tags.splice(tagIndex, 1)
   }
 
   setType (type) {

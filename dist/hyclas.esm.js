@@ -136,7 +136,6 @@ function _createClass(Constructor, protoProps, staticProps) {
       var tagIndex = this.tags.findIndex(function (tag) {
         return tag.id === tagId;
       });
-      this.tags.splice(tagIndex, 1);
 
       while (element.firstChild) {
         parent.insertBefore(element.firstChild, element);
@@ -147,6 +146,7 @@ function _createClass(Constructor, protoProps, staticProps) {
       } catch (error) {}
 
       this.removeEvent(this.tags[tagIndex]);
+      this.tags.splice(tagIndex, 1);
     }
   }, {
     key: "setType",
