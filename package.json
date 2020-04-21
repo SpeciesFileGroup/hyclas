@@ -1,6 +1,6 @@
 {
   "name": "@sfgrp/hyclas",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A highlighting text classifier.",
   "main": "./dist/hyclas.esm.js",
   "module": "dist/hyclas.esm.js",

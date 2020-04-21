@@ -192,7 +192,7 @@ function _createClass(Constructor, protoProps, staticProps) {
   }, {
     key: "createEvent",
     value: function createEvent(tag) {
-      var event = new Event('createTag', {
+      var event = new CustomEvent('createTag', {
         detail: tag
       });
       this.element.dispatchEvent(event);
@@ -200,7 +200,7 @@ function _createClass(Constructor, protoProps, staticProps) {
   }, {
     key: "removeEvent",
     value: function removeEvent(tag) {
-      var event = new Event('removeTag', {
+      var event = new CustomEvent('removeTag', {
         detail: tag
       });
       this.element.dispatchEvent(event);

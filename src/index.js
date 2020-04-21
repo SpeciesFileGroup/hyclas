@@ -50,7 +50,8 @@ var toolBar = new menuSelector(elementToolbar, lib)
 
 document.querySelector('#json').innerHTML = JSON.stringify(lib.toJSON(), null, 2)
 
-element.addEventListener('createTag', () => {
+element.addEventListener('createTag', (event) => {
+  console.log(event)
   document.querySelector('#json').innerHTML = JSON.stringify(lib.toJSON(), null, 2)
 })
 

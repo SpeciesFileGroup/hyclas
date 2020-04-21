@@ -138,12 +138,12 @@ class hyclas {
   }
 
   createEvent (tag) {
-    var event = new Event('createTag', { detail: tag })
+    var event = new CustomEvent('createTag', { detail: tag })
     this.element.dispatchEvent(event)
   }
 
   removeEvent (tag) {
-    var event = new Event('removeTag', { detail: tag })
+    var event = new CustomEvent('removeTag', { detail: tag })
     this.element.dispatchEvent(event)
   }
 
